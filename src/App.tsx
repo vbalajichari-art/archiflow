@@ -127,6 +127,19 @@ export default function App() {
       <main className="flex-1 ml-64 p-10">
         <div className="max-w-6xl mx-auto">
           {renderContent()}
+          
+          <footer className="mt-16 pt-8 border-t border-zinc-200 text-zinc-400">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <p className="text-sm">© 2026 Balaji Venkatachary. All rights reserved.</p>
+              <div className="max-w-md">
+                <p className="text-[10px] leading-relaxed italic">
+                  <strong>Disclaimer:</strong> This tool is intended for estimation and decision-support purposes only. 
+                  Calculations are based on user-provided data and architectural practice benchmarks. 
+                  Final financial decisions should be verified with a qualified accountant or financial advisor.
+                </p>
+              </div>
+            </div>
+          </footer>
         </div>
       </main>
     </div>
