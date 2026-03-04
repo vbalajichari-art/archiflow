@@ -28,7 +28,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, repor
               </div>
               <div>
                 <h3 className="text-lg font-bold text-zinc-900">Monthly Practice Report</h3>
-                <p className="text-xs text-zinc-500">AI-Generated Financial Analysis</p>
+                <p className="text-xs text-zinc-500">Local Financial Analysis Engine</p>
               </div>
             </div>
             <button 
