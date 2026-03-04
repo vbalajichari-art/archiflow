@@ -7,7 +7,9 @@ import { CashFlowEngine } from './components/CashFlowEngine';
 import { RiskEngine } from './components/RiskEngine';
 import { GrowthEngine } from './components/GrowthEngine';
 import { SeparationEngine } from './components/SeparationEngine';
+import { ReportModal } from './components/ReportModal';
 import { Menu } from 'lucide-react';
+import { formatCurrency } from './utils';
 import { 
   SurvivalData, 
   QuotationData, 
@@ -21,6 +23,67 @@ import {
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [reportContent, setReportContent] = useState<string | null>(null);
+  const [isGeneratingReport, setIsGeneratingReport] = useState(false);
+
+  const handleGenerateReport = async () => {
+    setIsGeneratingReport(true);
+    setIsReportModalOpen(true);
+    setReportContent(null);
+
+    // Simulate a brief delay for "generation" feel
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    try {
+      const totalFixedCost = survival.rent + survival.salaries + survival.software + survival.utilities + survival.insurance + survival.loans + survival.admin;
+      const adjustedFixedCost = totalFixedCost * (1 + survival.bufferPercent / 100);
+      const cmr = survival.targetCMR / 100;
+      const breakEvenRevenue = cmr > 0 ? adjustedFixedCost / cmr : 0;
+      const sixMonthReserve = cashflow.reduce((acc, curr) => acc + (curr.inflow - curr.outflow), 0);
+      const idealEmergencyFund = (risk.practiceMonthlyCost * 3) + (risk.personalMonthlyExpense * 6);
+      const stabilityScore = Math.min(100, (risk.currentBuffer / idealEmergencyFund) * 100);
+
+      const report = `ARCHIFLOW PRACTICE PERFORMANCE REPORT
+Generated: ${new Date().toLocaleDateString()}
+
+1. EXECUTIVE SUMMARY
+Your practice is currently operating at a ${stabilityScore > 70 ? 'STABLE' : 'CAUTIOUS'} level with a stability score of ${stabilityScore.toFixed(0)}%. 
+${sixMonthReserve > 0 ? 'Cash flow projections for the next 6 months are positive.' : 'Attention is required: 6-month cash flow projections indicate a potential deficit.'}
+
+2. CRITICAL FINANCIAL METRICS
+- Monthly Fixed Costs (Base): ${formatCurrency(totalFixedCost)}
+- Adjusted Fixed Costs (with ${survival.bufferPercent}% Buffer): ${formatCurrency(adjustedFixedCost)}
+- Monthly Break-Even Revenue: ${formatCurrency(breakEvenRevenue)}
+- Current Cash Buffer: ${formatCurrency(risk.currentBuffer)}
+
+3. CASH FLOW OUTLOOK (6-MONTH)
+- Total Projected Net: ${formatCurrency(sixMonthReserve)}
+- Average Monthly Inflow: ${formatCurrency(cashflow.reduce((acc, c) => acc + c.inflow, 0) / cashflow.length)}
+- Average Monthly Outflow: ${formatCurrency(cashflow.reduce((acc, c) => acc + c.outflow, 0) / cashflow.length)}
+
+4. STRATEGIC RECOMMENDATIONS
+- HIRING: ${stabilityScore > 70 ? 'Hiring readiness is HIGH. Consider adding junior staff to increase billable capacity.' : 'Hiring readiness is LOW. Focus on increasing current utilization before adding payroll.'}
+- RISK: ${risk.currentBuffer < idealEmergencyFund ? 'Emergency fund is below target. Prioritize building a 3-month practice reserve.' : 'Emergency fund is healthy. Consider strategic reinvestment or profit distribution.'}
+- PRICING: ${survival.targetCMR < 60 ? 'Target CMR is below industry standard (60%). Review project multipliers.' : 'Target CMR is healthy. Maintain current pricing discipline.'}
+
+5. ACTION ITEMS
+[ ] Move ${formatCurrency(breakEvenRevenue * 0.2)} to Tax Reserve immediately.
+[ ] Review ${cashflow.find(c => c.inflow < c.outflow)?.month || 'upcoming'} month's outflow to optimize fixed costs.
+[ ] Audit current project realization rates (Target: ${survival.realizationRate}%).
+
+---
+End of Report.
+Generated locally by Archiflow Practice OS.`;
+
+      setReportContent(report);
+    } catch (error) {
+      console.error("Report generation failed:", error);
+      setReportContent("An error occurred while generating the report.");
+    } finally {
+      setIsGeneratingReport(false);
+    }
+  };
 
   // Initial States
   const [survival, setSurvival] = useState<SurvivalData>({
@@ -105,7 +168,17 @@ export default function App() {
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard':
-        return <Dashboard survival={survival} quotation={quotation} cashflow={cashflow} risk={risk} growth={growth} split={split} />;
+        return (
+          <Dashboard 
+            survival={survival} 
+            quotation={quotation} 
+            cashflow={cashflow} 
+            risk={risk} 
+            growth={growth} 
+            split={split} 
+            onGenerateReport={handleGenerateReport}
+          />
+        );
       case 'survival':
         return <SurvivalEngine data={survival} setData={setSurvival} />;
       case 'quotation':
@@ -164,6 +237,13 @@ export default function App() {
           </footer>
         </div>
       </main>
+
+      <ReportModal 
+        isOpen={isReportModalOpen} 
+        onClose={() => setIsReportModalOpen(false)} 
+        report={reportContent} 
+        isLoading={isGeneratingReport} 
+      />
     </div>
   );
 }

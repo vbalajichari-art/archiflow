@@ -24,12 +24,14 @@ interface DashboardProps {
   risk: RiskData;
   growth: GrowthData;
   split: SplitModel;
+  onGenerateReport: () => void;
 }
 
 export const Dashboard: React.FC<DashboardProps> = ({ 
   survival, 
   cashflow, 
   risk, 
+  onGenerateReport
 }) => {
   const totalFixedCost = survival.rent + survival.salaries + survival.software + survival.utilities + survival.insurance + survival.loans + survival.admin;
   const adjustedFixedCost = totalFixedCost * (1 + survival.bufferPercent / 100);
@@ -177,7 +179,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
               Follow up on retention payments for completed projects
             </li>
           </ul>
-          <button className="mt-8 w-full py-3 bg-white text-zinc-900 rounded-xl font-bold text-sm hover:bg-zinc-100 transition-colors">
+          <button 
+            onClick={onGenerateReport}
+            className="mt-8 w-full py-3 bg-white text-zinc-900 rounded-xl font-bold text-sm hover:bg-zinc-100 transition-colors"
+          >
             Generate Monthly Report
           </button>
         </div>
