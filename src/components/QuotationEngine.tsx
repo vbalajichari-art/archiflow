@@ -82,7 +82,7 @@ export const QuotationEngine: React.FC<QuotationEngineProps> = ({ data, setData,
         <div className="lg:col-span-2 space-y-6">
           <div className="glass-panel p-6 space-y-6">
             <h3 className="text-sm font-bold text-zinc-400 uppercase tracking-wider">Project Scope & Scale</h3>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="col-span-2 md:col-span-1">
                 <label className="label-text">Project Typology</label>
                 <select 
@@ -129,7 +129,7 @@ export const QuotationEngine: React.FC<QuotationEngineProps> = ({ data, setData,
 
           <div className="glass-panel p-6 space-y-6">
             <h3 className="text-sm font-bold text-zinc-400 uppercase tracking-wider">Internal Effort & Costs</h3>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
                 <label className="label-text">Estimated Effort (Hours)</label>
                 <input 
@@ -175,7 +175,7 @@ export const QuotationEngine: React.FC<QuotationEngineProps> = ({ data, setData,
 
           <div className="glass-panel p-6 space-y-6">
             <h3 className="text-sm font-bold text-zinc-400 uppercase tracking-wider">Market-Based Pricing</h3>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {data.feeMethod === 'PerSqFt' && (
                 <div className="col-span-2">
                   <label className="label-text">Target Rate per SqFt</label>

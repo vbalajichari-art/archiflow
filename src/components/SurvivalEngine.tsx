@@ -42,7 +42,7 @@ export const SurvivalEngine: React.FC<SurvivalEngineProps> = ({ data, setData })
         <div className="glass-panel p-6 space-y-4">
           <h3 className="text-sm font-bold text-zinc-400 uppercase tracking-wider mb-4">Monthly Fixed Costs</h3>
           
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="label-text">Office Rent</label>
               <input 
@@ -119,7 +119,7 @@ export const SurvivalEngine: React.FC<SurvivalEngineProps> = ({ data, setData })
 
           <div className="pt-4 border-t border-zinc-100">
             <h3 className="text-sm font-bold text-zinc-400 uppercase tracking-wider mb-4">Efficiency & Rates</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="label-text">Total Monthly Hours</label>
                 <input 

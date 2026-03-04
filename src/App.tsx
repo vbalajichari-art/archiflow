@@ -7,6 +7,7 @@ import { CashFlowEngine } from './components/CashFlowEngine';
 import { RiskEngine } from './components/RiskEngine';
 import { GrowthEngine } from './components/GrowthEngine';
 import { SeparationEngine } from './components/SeparationEngine';
+import { Menu } from 'lucide-react';
 import { 
   SurvivalData, 
   QuotationData, 
@@ -19,6 +20,7 @@ import {
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Initial States
   const [survival, setSurvival] = useState<SurvivalData>({
@@ -122,9 +124,29 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 flex">
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
-      <main className="flex-1 ml-64 p-10">
+    <div className="min-h-screen bg-zinc-50 flex flex-col lg:flex-row">
+      <Sidebar 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+        isOpen={isSidebarOpen} 
+        setIsOpen={setIsSidebarOpen} 
+      />
+      
+      {/* Mobile Header */}
+      <header className="lg:hidden bg-white border-b border-zinc-200 p-4 sticky top-0 z-30 flex items-center justify-between">
+        <h1 className="text-lg font-bold tracking-tight text-zinc-900 flex items-center gap-2">
+          <div className="w-6 h-6 bg-zinc-900 rounded-md flex items-center justify-center text-white font-mono text-sm">A</div>
+          Archiflow
+        </h1>
+        <button 
+          onClick={() => setIsSidebarOpen(true)}
+          className="p-2 text-zinc-500 hover:text-zinc-900"
+        >
+          <Menu size={24} />
+        </button>
+      </header>
+
+      <main className="flex-1 lg:ml-64 p-4 md:p-10">
         <div className="max-w-6xl mx-auto">
           {renderContent()}
           

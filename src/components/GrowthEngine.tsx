@@ -49,7 +49,7 @@ export const GrowthEngine: React.FC<GrowthEngineProps> = ({ data, setData }) => 
             </div>
 
             <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="label-text">Monthly Salary (CTC)</label>
                   <input 
@@ -121,7 +121,7 @@ export const GrowthEngine: React.FC<GrowthEngineProps> = ({ data, setData }) => 
             </div>
 
             <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="label-text">Initial Investment</label>
                   <input 

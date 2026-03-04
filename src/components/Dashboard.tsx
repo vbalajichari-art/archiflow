@@ -59,8 +59,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
         <p className="text-zinc-500 mt-1">Real-time financial health and decision readiness.</p>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="glass-panel p-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="glass-panel p-4 md:p-6">
           <div className="flex justify-between items-start mb-4">
             <div className="p-2 bg-rose-50 text-rose-600 rounded-lg">
               <ShieldAlert size={20} />
@@ -81,7 +81,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           </div>
         </div>
 
-        <div className="glass-panel p-6">
+        <div className="glass-panel p-4 md:p-6">
           <div className="flex justify-between items-start mb-4">
             <div className="p-2 bg-emerald-50 text-emerald-600 rounded-lg">
               <TrendingUp size={20} />
@@ -98,7 +98,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           </div>
         </div>
 
-        <div className="glass-panel p-6">
+        <div className="glass-panel p-4 md:p-6">
           <div className="flex justify-between items-start mb-4">
             <div className="p-2 bg-amber-50 text-amber-600 rounded-lg">
               <ShieldCheck size={20} />
@@ -112,7 +112,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           </div>
         </div>
 
-        <div className="glass-panel p-6">
+        <div className="glass-panel p-4 md:p-6">
           <div className="flex justify-between items-start mb-4">
             <div className="p-2 bg-zinc-900 text-white rounded-lg">
               <Zap size={20} />
@@ -128,8 +128,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="glass-panel p-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+        <div className="glass-panel p-6 md:p-8">
           <h3 className="text-lg font-bold text-zinc-900 mb-6">Strategic Readiness</h3>
           <div className="space-y-6">
             <div className="flex items-start gap-4">
@@ -161,7 +161,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           </div>
         </div>
 
-        <div className="bg-zinc-900 rounded-2xl p-8 text-white">
+        <div className="bg-zinc-900 rounded-2xl p-6 md:p-8 text-white">
           <h3 className="text-lg font-bold mb-6">Action Items</h3>
           <ul className="space-y-4">
             <li className="flex items-center gap-3 text-sm text-zinc-400">
