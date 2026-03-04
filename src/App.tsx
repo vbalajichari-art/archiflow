@@ -13,7 +13,8 @@ import {
   CashFlowItem, 
   RiskData, 
   GrowthData, 
-  SplitModel 
+  SplitModel,
+  SeparationData
 } from './types';
 
 export default function App() {
@@ -46,27 +47,49 @@ export default function App() {
     profitMargin: 25,
     riskScore: 2,
     variableCosts: 5000,
+    squareFootage: 2500,
+    ratePerSqFt: 150,
+    projectValue: 5000000,
+    feePercentage: 5,
+    lumpSumAmount: 350000,
+    billingRate: 2500,
   });
 
   const [cashflow, setCashflow] = useState<CashFlowItem[]>([
-    { month: 'Mar', inflow: 250000, outflow: 180000 },
-    { month: 'Apr', inflow: 180000, outflow: 190000 },
-    { month: 'May', inflow: 320000, outflow: 200000 },
-    { month: 'Jun', inflow: 150000, outflow: 180000 },
-    { month: 'Jul', inflow: 400000, outflow: 220000 },
-    { month: 'Aug', inflow: 280000, outflow: 190000 },
+    { month: 'Mar', inflow: 250000, outflow: 180000, receivables: 45000 },
+    { month: 'Apr', inflow: 180000, outflow: 190000, receivables: 60000 },
+    { month: 'May', inflow: 320000, outflow: 200000, receivables: 30000 },
+    { month: 'Jun', inflow: 150000, outflow: 180000, receivables: 85000 },
+    { month: 'Jul', inflow: 400000, outflow: 220000, receivables: 20000 },
+    { month: 'Aug', inflow: 280000, outflow: 190000, receivables: 40000 },
   ]);
 
   const [risk, setRisk] = useState<RiskData>({
     practiceMonthlyCost: 190000,
     personalMonthlyExpense: 60000,
     currentBuffer: 450000,
+    monthlyFixedCosts: 190000,
+    personalExpenses: 60000,
+    safetyMonths: 3,
   });
 
   const [growth, setGrowth] = useState<GrowthData>({
     juniorSalary: 25000,
     productivityGain: 0.4,
     newProjectPotential: 600000,
+    expectedBillableHours: 120,
+    billingRate: 1500,
+    realizationRate: 0.85,
+    investmentCost: 200000,
+    annualBenefit: 80000,
+    discountRate: 12,
+  });
+
+  const [separation, setSeparation] = useState<SeparationData>({
+    revenue: 250000,
+    taxRate: 20,
+    reinvestmentRate: 15,
+    ownerSalary: 60000,
   });
 
   const [split, setSplit] = useState<SplitModel>({
@@ -92,7 +115,7 @@ export default function App() {
       case 'growth':
         return <GrowthEngine data={growth} setData={setGrowth} />;
       case 'separation':
-        return <SeparationEngine data={split} setData={setSplit} monthlyRevenue={cashflow[0].inflow} />;
+        return <SeparationEngine data={separation} setData={setSeparation} />;
       default:
         return <Dashboard survival={survival} quotation={quotation} cashflow={cashflow} risk={risk} growth={growth} split={split} />;
     }

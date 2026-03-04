@@ -27,24 +27,47 @@ export interface QuotationData {
   profitMargin: number;
   riskScore: number; // 1-5
   variableCosts: number; // Direct project costs (travel, printing, etc.)
+  squareFootage?: number;
+  ratePerSqFt?: number;
+  projectValue?: number;
+  feePercentage?: number;
+  lumpSumAmount?: number;
+  billingRate?: number;
 }
 
 export interface CashFlowItem {
   month: string;
   inflow: number;
   outflow: number;
+  receivables: number;
 }
 
 export interface RiskData {
   practiceMonthlyCost: number;
   personalMonthlyExpense: number;
   currentBuffer: number;
+  monthlyFixedCosts: number;
+  personalExpenses: number;
+  safetyMonths: number;
 }
 
 export interface GrowthData {
   juniorSalary: number;
   productivityGain: number;
   newProjectPotential: number;
+  expectedBillableHours: number;
+  billingRate: number;
+  realizationRate: number;
+  investmentCost: number;
+  annualBenefit: number;
+  discountRate: number;
+}
+
+export interface SeparationData {
+  revenue: number;
+  taxRate: number;
+  reinvestmentRate: number;
+  ownerSalary: number;
 }
 
 export interface SplitModel {
