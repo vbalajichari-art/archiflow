@@ -1,11 +1,14 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import {defineConfig} from 'vite';
+import {defineConfig, loadEnv} from 'vite';
 
-export default defineConfig(() => {
+export default defineConfig(({mode}) => {
+  const env = loadEnv(mode, process.cwd(), '');
+  const isGitHubPages = env.GITHUB_PAGES === 'true';
+  
   return {
-    base: process.env.GITHUB_PAGES === 'true' ? '/archiflow/' : '/',
+    base: isGitHubPages ? '/archiflow/' : '/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
@@ -15,8 +18,6 @@ export default defineConfig(() => {
     server: {
       port: 3000,
       host: '0.0.0.0',
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
     },
   };
