@@ -83,7 +83,7 @@ export const QuotationEngine: React.FC<QuotationEngineProps> = ({ data, setData,
           <div className="glass-panel p-6 space-y-6">
             <h3 className="text-sm font-bold text-zinc-400 uppercase tracking-wider">Project Scope & Scale</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="col-span-2 md:col-span-1">
+              <div className="sm:col-span-2 md:col-span-1">
                 <label className="label-text">Project Typology</label>
                 <select 
                   className="input-field"
@@ -93,7 +93,7 @@ export const QuotationEngine: React.FC<QuotationEngineProps> = ({ data, setData,
                   {typologies.map(t => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
-              <div className="col-span-2 md:col-span-1">
+              <div className="sm:col-span-2 md:col-span-1">
                 <label className="label-text">Fee Method</label>
                 <select 
                   className="input-field"
@@ -177,7 +177,7 @@ export const QuotationEngine: React.FC<QuotationEngineProps> = ({ data, setData,
             <h3 className="text-sm font-bold text-zinc-400 uppercase tracking-wider">Market-Based Pricing</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {data.feeMethod === 'PerSqFt' && (
-                <div className="col-span-2">
+                <div className="sm:col-span-2">
                   <label className="label-text">Target Rate per SqFt</label>
                   <input 
                     type="number" 
@@ -190,7 +190,7 @@ export const QuotationEngine: React.FC<QuotationEngineProps> = ({ data, setData,
               )}
 
               {data.feeMethod === 'Percentage' && (
-                <div className="col-span-2">
+                <div className="sm:col-span-2">
                   <label className="label-text">Fee Percentage (%)</label>
                   <input 
                     type="number" 
@@ -203,7 +203,7 @@ export const QuotationEngine: React.FC<QuotationEngineProps> = ({ data, setData,
               )}
 
               {data.feeMethod === 'LumpSum' && (
-                <div className="col-span-2">
+                <div className="sm:col-span-2">
                   <label className="label-text">Lump Sum Amount</label>
                   <input 
                     type="number" 
@@ -216,7 +216,7 @@ export const QuotationEngine: React.FC<QuotationEngineProps> = ({ data, setData,
               )}
 
               {data.feeMethod === 'Hourly' && (
-                <div className="col-span-2">
+                <div className="sm:col-span-2">
                   <label className="label-text">Client Billing Rate (per Hour)</label>
                   <div className="relative">
                     <input 
@@ -318,7 +318,7 @@ export const QuotationEngine: React.FC<QuotationEngineProps> = ({ data, setData,
             )}
 
             {(data.squareFootage || data.projectValue) && (
-              <div className="mt-6 pt-6 border-t border-white/10 grid grid-cols-2 gap-4">
+              <div className="mt-6 pt-6 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {data.squareFootage && data.squareFootage > 0 && (
                   <div>
                     <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Eq. Rate / SqFt</p>
