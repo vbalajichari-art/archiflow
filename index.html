@@ -3,12 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
-    <script type="module" crossorigin src="/pwa-app/assets/index-ByTOHzgQ.js"></script>
-    <link rel="stylesheet" crossorigin href="/pwa-app/assets/index-CvO79Vcl.css">
+    <title>Archiflow | Practice OS</title>
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="theme-color" content="#09090b" />
+    <link rel="apple-touch-icon" href="https://picsum.photos/seed/archiflow/192/192" />
+    <script type="module" crossorigin src="/assets/index-yT8P_8HB.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-bn840gOr.css">
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js');
+        });
+      }
+    </script>
   </body>
 </html>
 
